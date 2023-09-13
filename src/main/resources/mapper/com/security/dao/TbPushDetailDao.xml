@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.TbPushDetailDao">
+
+    <resultMap type="com.security.entity.TbPushDetail" id="TbPushDetailMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="pushId" column="push_id" jdbcType="INTEGER"/>
+        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+        <result property="routeId" column="route_id" jdbcType="INTEGER"/>
+        <result property="siteId" column="site_id" jdbcType="INTEGER"/>
+        <result property="passengerId" column="passenger_id" jdbcType="INTEGER"/>
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="schoolName" column="school_name"  />
+        <result property="routeName" column="route_name"  />
+        <result property="siteName" column="site_name"  />
+        <result property="deptName" column="dept_name"  />
+        <result property="grade" column="grade"  />
+        <result property="passengerName" column="passenger_name"  />
+        <result property="money" column="money" jdbcType="NUMERIC"/>
+        <result property="packageName" column="package_name"  />
+        <result property="customerName" column="customer_name"  />
+        <result property="state" column="state"  />
+        <result property="pushTime" column="push_time" jdbcType="TIMESTAMP"/>
+        <result property="outTradeNo" column="out_trade_no"  />
+        <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+        <result property="phone" column="phone"  />
+        <result property="pushState" column="push_state"  />
+        <result property="cashPledgeInclude" column="cash_pledge_include"  />
+        <result property="serverCode" column="server_code"  />
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbPushDetailMap">
+        select
+          id, push_id, order_id, route_id, site_id, passenger_id, dept_id, school_name, route_name, site_name, dept_name, grade, passenger_name, money, package_name, customer_name, state, push_time, out_trade_no, pay_time, phone, push_state, cash_pledge_include, server_code
+        from tb_push_detail
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbPushDetailMap">
+        select
+          id, push_id, order_id, route_id, site_id, passenger_id, dept_id, school_name, route_name, site_name, dept_name, grade, passenger_name, money, package_name, customer_name, state, push_time, out_trade_no, pay_time, phone, push_state, cash_pledge_include, server_code
+        from tb_push_detail
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="pushId != null">
+                and push_id = #{pushId}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="routeId != null">
+                and route_id = #{routeId}
+            </if>
+            <if test="siteId != null">
+                and site_id = #{siteId}
+            </if>
+            <if test="passengerId != null">
+                and passenger_id = #{passengerId}
+            </if>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                and school_name = #{schoolName}
+            </if>
+            <if test="routeName != null and routeName != ''">
+                and route_name = #{routeName}
+            </if>
+            <if test="siteName != null and siteName != ''">
+                and site_name = #{siteName}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and dept_name = #{deptName}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="passengerName != null and passengerName != ''">
+                and passenger_name = #{passengerName}
+            </if>
+            <if test="money != null">
+                and money = #{money}
+            </if>
+            <if test="packageName != null and packageName != ''">
+                and package_name = #{packageName}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="pushTime != null">
+                and push_time = #{pushTime}
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                and out_trade_no = #{outTradeNo}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="pushState != null and pushState != ''">
+                and push_state = #{pushState}
+            </if>
+            <if test="cashPledgeInclude != null and cashPledgeInclude != ''">
+                and cash_pledge_include = #{cashPledgeInclude}
+            </if>
+            <if test="serverCode != null and serverCode != ''">
+                and server_code = #{serverCode}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from tb_push_detail
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="pushId != null">
+                and push_id = #{pushId}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+            <if test="routeId != null">
+                and route_id = #{routeId}
+            </if>
+            <if test="siteId != null">
+                and site_id = #{siteId}
+            </if>
+            <if test="passengerId != null">
+                and passenger_id = #{passengerId}
+            </if>
+            <if test="deptId != null">
+                and dept_id = #{deptId}
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                and school_name = #{schoolName}
+            </if>
+            <if test="routeName != null and routeName != ''">
+                and route_name = #{routeName}
+            </if>
+            <if test="siteName != null and siteName != ''">
+                and site_name = #{siteName}
+            </if>
+            <if test="deptName != null and deptName != ''">
+                and dept_name = #{deptName}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="passengerName != null and passengerName != ''">
+                and passenger_name = #{passengerName}
+            </if>
+            <if test="money != null">
+                and money = #{money}
+            </if>
+            <if test="packageName != null and packageName != ''">
+                and package_name = #{packageName}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="pushTime != null">
+                and push_time = #{pushTime}
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                and out_trade_no = #{outTradeNo}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="pushState != null and pushState != ''">
+                and push_state = #{pushState}
+            </if>
+            <if test="cashPledgeInclude != null and cashPledgeInclude != ''">
+                and cash_pledge_include = #{cashPledgeInclude}
+            </if>
+            <if test="serverCode != null and serverCode != ''">
+                and server_code = #{serverCode}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_push_detail(push_id, order_id, route_id, site_id, passenger_id, dept_id, school_name, route_name, site_name, dept_name, grade, passenger_name, money, package_name, customer_name, state, push_time, out_trade_no, pay_time, phone, push_state, cash_pledge_include, server_code)
+        values (#{pushId}, #{orderId}, #{routeId}, #{siteId}, #{passengerId}, #{deptId}, #{schoolName}, #{routeName}, #{siteName}, #{deptName}, #{grade}, #{passengerName}, #{money}, #{packageName}, #{customerName}, #{state}, #{pushTime}, #{outTradeNo}, #{payTime}, #{phone}, #{pushState}, #{cashPledgeInclude}, #{serverCode})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_push_detail(push_id, order_id, route_id, site_id, passenger_id, dept_id, school_name, route_name, site_name, dept_name, grade, passenger_name, money, package_name, customer_name, state, push_time, out_trade_no, pay_time, phone, push_state, cash_pledge_include, server_code)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.pushId}, #{entity.orderId}, #{entity.routeId}, #{entity.siteId}, #{entity.passengerId}, #{entity.deptId}, #{entity.schoolName}, #{entity.routeName}, #{entity.siteName}, #{entity.deptName}, #{entity.grade}, #{entity.passengerName}, #{entity.money}, #{entity.packageName}, #{entity.customerName}, #{entity.state}, #{entity.pushTime}, #{entity.outTradeNo}, #{entity.payTime}, #{entity.phone}, #{entity.pushState}, #{entity.cashPledgeInclude}, #{entity.serverCode})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_push_detail(push_id, order_id, route_id, site_id, passenger_id, dept_id, school_name, route_name, site_name, dept_name, grade, passenger_name, money, package_name, customer_name, state, push_time, out_trade_no, pay_time, phone, push_state, cash_pledge_include, server_code)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.pushId}, #{entity.orderId}, #{entity.routeId}, #{entity.siteId}, #{entity.passengerId}, #{entity.deptId}, #{entity.schoolName}, #{entity.routeName}, #{entity.siteName}, #{entity.deptName}, #{entity.grade}, #{entity.passengerName}, #{entity.money}, #{entity.packageName}, #{entity.customerName}, #{entity.state}, #{entity.pushTime}, #{entity.outTradeNo}, #{entity.payTime}, #{entity.phone}, #{entity.pushState}, #{entity.cashPledgeInclude}, #{entity.serverCode})
+        </foreach>
+        on duplicate key update
+        push_id = values(push_id),
+        order_id = values(order_id),
+        route_id = values(route_id),
+        site_id = values(site_id),
+        passenger_id = values(passenger_id),
+        dept_id = values(dept_id),
+        school_name = values(school_name),
+        route_name = values(route_name),
+        site_name = values(site_name),
+        dept_name = values(dept_name),
+        grade = values(grade),
+        passenger_name = values(passenger_name),
+        money = values(money),
+        package_name = values(package_name),
+        customer_name = values(customer_name),
+        state = values(state),
+        push_time = values(push_time),
+        out_trade_no = values(out_trade_no),
+        pay_time = values(pay_time),
+        phone = values(phone),
+        push_state = values(push_state),
+        cash_pledge_include = values(cash_pledge_include),
+        server_code = values(server_code)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_push_detail
+        <set>
+            <if test="pushId != null">
+                push_id = #{pushId},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+            <if test="routeId != null">
+                route_id = #{routeId},
+            </if>
+            <if test="siteId != null">
+                site_id = #{siteId},
+            </if>
+            <if test="passengerId != null">
+                passenger_id = #{passengerId},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="schoolName != null and schoolName != ''">
+                school_name = #{schoolName},
+            </if>
+            <if test="routeName != null and routeName != ''">
+                route_name = #{routeName},
+            </if>
+            <if test="siteName != null and siteName != ''">
+                site_name = #{siteName},
+            </if>
+            <if test="deptName != null and deptName != ''">
+                dept_name = #{deptName},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+            <if test="passengerName != null and passengerName != ''">
+                passenger_name = #{passengerName},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+            <if test="packageName != null and packageName != ''">
+                package_name = #{packageName},
+            </if>
+            <if test="customerName != null and customerName != ''">
+                customer_name = #{customerName},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="pushTime != null">
+                push_time = #{pushTime},
+            </if>
+            <if test="outTradeNo != null and outTradeNo != ''">
+                out_trade_no = #{outTradeNo},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="pushState != null and pushState != ''">
+                push_state = #{pushState},
+            </if>
+            <if test="cashPledgeInclude != null and cashPledgeInclude != ''">
+                cash_pledge_include = #{cashPledgeInclude},
+            </if>
+            <if test="serverCode != null and serverCode != ''">
+                server_code = #{serverCode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_push_detail where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.TbSupplierChangeRecordDao">
+
+    <resultMap type="com.security.entity.TbSupplierChangeRecord" id="TbSupplierChangeRecordMap">
+        <result property="recordId" column="record_id" jdbcType="INTEGER"/>
+        <result property="supplierId" column="supplier_id" jdbcType="INTEGER"/>
+        <result property="changeInformation" column="change_information" jdbcType="VARCHAR"/>
+        <result property="chargeTime" column="charge_time" jdbcType="TIMESTAMP"/>
+        <result property="changeUser" column="change_user" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbSupplierChangeRecordMap">
+        select
+          record_id, supplier_id, change_information, charge_time, change_user
+        from tb_supplier_change_record
+        where record_id = #{recordId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbSupplierChangeRecordMap">
+        select
+          record_id, supplier_id, change_information, charge_time, change_user
+        from tb_supplier_change_record
+        <where>
+            <if test="recordId != null">
+                and record_id = #{recordId}
+            </if>
+            <if test="supplierId != null">
+                and supplier_id = #{supplierId}
+            </if>
+            <if test="changeInformation != null and changeInformation != ''">
+                and change_information = #{changeInformation}
+            </if>
+            <if test="chargeTime != null">
+                and charge_time = #{chargeTime}
+            </if>
+            <if test="changeUser != null and changeUser != ''">
+                and change_user = #{changeUser}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from tb_supplier_change_record
+        <where>
+            <if test="recordId != null">
+                and record_id = #{recordId}
+            </if>
+            <if test="supplierId != null">
+                and supplier_id = #{supplierId}
+            </if>
+            <if test="changeInformation != null and changeInformation != ''">
+                and change_information = #{changeInformation}
+            </if>
+            <if test="chargeTime != null">
+                and charge_time = #{chargeTime}
+            </if>
+            <if test="changeUser != null and changeUser != ''">
+                and change_user = #{changeUser}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="recordId" useGeneratedKeys="true">
+        insert into tb_supplier_change_record(supplier_id, change_information, charge_time, change_user)
+        values (#{supplierId}, #{changeInformation}, #{chargeTime}, #{changeUser})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="recordId" useGeneratedKeys="true">
+        insert into tb_supplier_change_record(supplier_id, change_information, charge_time, change_user)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.supplierId}, #{entity.changeInformation}, #{entity.chargeTime}, #{entity.changeUser})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="recordId" useGeneratedKeys="true">
+        insert into tb_supplier_change_record(supplier_id, change_information, charge_time, change_user)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.supplierId}, #{entity.changeInformation}, #{entity.chargeTime}, #{entity.changeUser})
+        </foreach>
+        on duplicate key update
+        supplier_id = values(supplier_id),
+        change_information = values(change_information),
+        charge_time = values(charge_time),
+        change_user = values(change_user)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_supplier_change_record
+        <set>
+            <if test="supplierId != null">
+                supplier_id = #{supplierId},
+            </if>
+            <if test="changeInformation != null and changeInformation != ''">
+                change_information = #{changeInformation},
+            </if>
+            <if test="chargeTime != null">
+                charge_time = #{chargeTime},
+            </if>
+            <if test="changeUser != null and changeUser != ''">
+                change_user = #{changeUser},
+            </if>
+        </set>
+        where record_id = #{recordId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_supplier_change_record where record_id = #{recordId}
+    </delete>
+
+</mapper>
+

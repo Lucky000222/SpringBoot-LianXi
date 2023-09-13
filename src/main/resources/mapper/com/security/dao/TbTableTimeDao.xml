@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.TbTableTimeDao">
+
+    <resultMap type="com.security.entity.TbTableTime" id="TbTableTimeMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="saveTime" column="save_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="projectId" column="project_id" jdbcType="VARCHAR"/>
+        <result property="cron" column="cron" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbTableTimeMap">
+        select
+          id, save_time, create_time, project_id, cron
+        from tb_table_time
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbTableTimeMap">
+        select
+          id, save_time, create_time, project_id, cron
+        from tb_table_time
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="saveTime != null">
+                and save_time = #{saveTime}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="cron != null and cron != ''">
+                and cron = #{cron}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from tb_table_time
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="saveTime != null">
+                and save_time = #{saveTime}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="cron != null and cron != ''">
+                and cron = #{cron}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_table_time(save_time, create_time, project_id, cron)
+        values (#{saveTime}, #{createTime}, #{projectId}, #{cron})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_table_time(save_time, create_time, project_id, cron)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.saveTime}, #{entity.createTime}, #{entity.projectId}, #{entity.cron})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_table_time(save_time, create_time, project_id, cron)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.saveTime}, #{entity.createTime}, #{entity.projectId}, #{entity.cron})
+        </foreach>
+        on duplicate key update
+        save_time = values(save_time),
+        create_time = values(create_time),
+        project_id = values(project_id),
+        cron = values(cron)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_table_time
+        <set>
+            <if test="saveTime != null">
+                save_time = #{saveTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="cron != null and cron != ''">
+                cron = #{cron},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_table_time where id = #{id}
+    </delete>
+
+    <!--根据projecId查询单个-->
+    <select id="selectByProjectId" resultMap="TbTableTimeMap">
+        select
+            id, save_time, create_time, project_id, cron
+        from tb_table_time
+        where project_id = #{projectId}
+    </select>
+
+</mapper>
+

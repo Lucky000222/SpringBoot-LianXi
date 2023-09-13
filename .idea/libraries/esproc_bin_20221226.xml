@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="esproc-bin-20221226">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/java/com/security/lib/esproc-bin-20221226.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

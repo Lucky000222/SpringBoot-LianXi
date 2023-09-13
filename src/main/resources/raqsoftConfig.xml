@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config Version="3">
+    <Runtime>
+        <DBList>
+            <DB name="progress_dev">
+                <property name="url" value="jdbc:mysql://192.168.0.88/progress_dev?useCursorFetch=true"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="type" value="10"/>
+                <property name="user" value="ncxhr"/>
+                <property name="password" value="Dl_800736"/>
+                <property name="batchSize" value="0"/>
+                <property name="autoConnect" value="true"/>
+                <property name="useSchema" value="false"/>
+                <property name="addTilde" value="false"/>
+                <property name="needTransContent" value="false"/>
+                <property name="needTransSentence" value="false"/>
+                <property name="caseSentence" value="false"/>
+            </DB>
+        </DBList>
+        <Esproc>
+            <charSet>UTF-8</charSet>
+            <splPathList>
+                <splPath>demo</splPath>
+            </splPathList>
+            <dateFormat>yyyy-MM-dd</dateFormat>
+            <timeFormat>HH:mm:ss</timeFormat>
+            <dateTimeFormat>yyyy-MM-dd HH:mm:ss</dateTimeFormat>
+            <mainPath>D:\ItRuanJian\Ymodel\esProc</mainPath>
+            <tempPath/>
+            <bufSize>65536</bufSize>
+            <parallelNum>1</parallelNum>
+            <cursorParallelNum>1</cursorParallelNum>
+            <blockSize>1048576</blockSize>
+            <nullStrings>nan,null,n/a</nullStrings>
+            <fetchCount>9999</fetchCount>
+            <extLibsPath>D:\ItRuanJian\Ymodel\esProc\extlib</extLibsPath>
+            <importLibs>
+                <lib>YModelCli</lib>
+            </importLibs>
+<!--            <customFunctionFile>customFunctions.properties</customFunctionFile>-->
+            <serialNo/>
+        </Esproc>
+        <Logger>
+            <Level>DEBUG</Level>
+        </Logger>
+    </Runtime>
+    <JDBC>
+    </JDBC>
+</Config>

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.JdPlanWbsDao">
+
+    <resultMap type="com.security.entity.JdPlanWbs" id="JdPlanWbsMap">
+        <result property="id" column="id" />
+        <result property="parentId" column="parent_id" />
+        <result property="projectId" column="project_id" />
+        <result property="projectCode" column="project_code" />
+        <result property="sectionId" column="section_id" />
+        <result property="sectionCode" column="section_code" />
+        <result property="wbsInstanceId" column="wbs_instance_id" />
+        <result property="versionId" column="version_id" />
+        <result property="wbsCode" column="wbs_code" />
+        <result property="wbsName" column="wbs_name" />
+        <result property="divideType" column="divide_type" />
+        <result property="structType" column="struct_type" />
+        <result property="startDate" column="start_date" />
+        <result property="endDate" column="end_date" />
+        <result property="realStartDate" column="real_start_date" />
+        <result property="realEndDate" column="real_end_date" />
+        <result property="outputValue" column="output_value" />
+        <result property="realOutputValue" column="real_output_value" />
+        <result property="process" column="process" />
+        <result property="chargePerson" column="charge_person" />
+        <result property="status" column="status" />
+        <result property="isMilestone" column="is_milestone" />
+        <result property="isRelevance" column="is_relevance" />
+        <result property="createUser" column="create_user" />
+        <result property="createTime" column="create_time" />
+        <result property="modifier" column="modifier" />
+        <result property="modifyDateTime" column="modify_date_time" />
+        <result property="sortedOrder" column="sorted_order" />
+        <result property="delFlag" column="del_flag" />
+        <result property="remark" column="remark" />
+        <result property="orgId" column="org_id" />
+        <result property="isLeaf" column="is_leaf" />
+        <result property="chargePersonId" column="charge_person_id" />
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="JdPlanWbsMap">
+        select
+          id, parent_id, project_id, project_code, section_id, section_code, wbs_instance_id, version_id, wbs_code, wbs_name, divide_type, struct_type, start_date, end_date, real_start_date, real_end_date, output_value, real_output_value, process, charge_person, status, is_milestone, is_relevance, create_user, create_time, modifier, modify_date_time, sorted_order, del_flag, remark, org_id, is_leaf, charge_person_id
+        from jd_plan_wbs
+        where id = #{id}
+    </select>
+
+    <select id="queryList" resultMap="JdPlanWbsMap">
+        select id, parent_id, project_id, project_code, section_id, section_code, wbs_instance_id, version_id, wbs_code, wbs_name, divide_type, struct_type, start_date, end_date, real_start_date, real_end_date, output_value, real_output_value, process, charge_person, status, is_milestone, is_relevance, create_user, create_time, modifier, modify_date_time, sorted_order, del_flag, remark, org_id, is_leaf, charge_person_id
+        from jd_plan_wbs
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="JdPlanWbsMap">
+        select
+          id, parent_id, project_id, project_code, section_id, section_code, wbs_instance_id, version_id, wbs_code, wbs_name, divide_type, struct_type, start_date, end_date, real_start_date, real_end_date, output_value, real_output_value, process, charge_person, status, is_milestone, is_relevance, create_user, create_time, modifier, modify_date_time, sorted_order, del_flag, remark, org_id, is_leaf, charge_person_id
+        from jd_plan_wbs
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectCode != null and projectCode != ''">
+                and project_code = #{projectCode}
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                and section_id = #{sectionId}
+            </if>
+            <if test="sectionCode != null and sectionCode != ''">
+                and section_code = #{sectionCode}
+            </if>
+            <if test="wbsInstanceId != null and wbsInstanceId != ''">
+                and wbs_instance_id = #{wbsInstanceId}
+            </if>
+            <if test="versionId != null and versionId != ''">
+                and version_id = #{versionId}
+            </if>
+            <if test="wbsCode != null and wbsCode != ''">
+                and wbs_code = #{wbsCode}
+            </if>
+            <if test="wbsName != null and wbsName != ''">
+                and wbs_name = #{wbsName}
+            </if>
+            <if test="divideType != null and divideType != ''">
+                and divide_type = #{divideType}
+            </if>
+            <if test="structType != null and structType != ''">
+                and struct_type = #{structType}
+            </if>
+            <if test="startDate != null">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null">
+                and end_date = #{endDate}
+            </if>
+            <if test="realStartDate != null">
+                and real_start_date = #{realStartDate}
+            </if>
+            <if test="realEndDate != null">
+                and real_end_date = #{realEndDate}
+            </if>
+            <if test="outputValue != null">
+                and output_value = #{outputValue}
+            </if>
+            <if test="realOutputValue != null">
+                and real_output_value = #{realOutputValue}
+            </if>
+            <if test="process != null and process != ''">
+                and process = #{process}
+            </if>
+            <if test="chargePerson != null and chargePerson != ''">
+                and charge_person = #{chargePerson}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="isMilestone != null and isMilestone != ''">
+                and is_milestone = #{isMilestone}
+            </if>
+            <if test="isRelevance != null and isRelevance != ''">
+                and is_relevance = #{isRelevance}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="modifier != null and modifier != ''">
+                and modifier = #{modifier}
+            </if>
+            <if test="modifyDateTime != null">
+                and modify_date_time = #{modifyDateTime}
+            </if>
+            <if test="sortedOrder != null">
+                and sorted_order = #{sortedOrder}
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                and del_flag = #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                and org_id = #{orgId}
+            </if>
+            <if test="isLeaf != null">
+                and is_leaf = #{isLeaf}
+            </if>
+            <if test="chargePersonId != null and chargePersonId != ''">
+                and charge_person_id = #{chargePersonId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from jd_plan_wbs
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectCode != null and projectCode != ''">
+                and project_code = #{projectCode}
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                and section_id = #{sectionId}
+            </if>
+            <if test="sectionCode != null and sectionCode != ''">
+                and section_code = #{sectionCode}
+            </if>
+            <if test="wbsInstanceId != null and wbsInstanceId != ''">
+                and wbs_instance_id = #{wbsInstanceId}
+            </if>
+            <if test="versionId != null and versionId != ''">
+                and version_id = #{versionId}
+            </if>
+            <if test="wbsCode != null and wbsCode != ''">
+                and wbs_code = #{wbsCode}
+            </if>
+            <if test="wbsName != null and wbsName != ''">
+                and wbs_name = #{wbsName}
+            </if>
+            <if test="divideType != null and divideType != ''">
+                and divide_type = #{divideType}
+            </if>
+            <if test="structType != null and structType != ''">
+                and struct_type = #{structType}
+            </if>
+            <if test="startDate != null">
+                and start_date = #{startDate}
+            </if>
+            <if test="endDate != null">
+                and end_date = #{endDate}
+            </if>
+            <if test="realStartDate != null">
+                and real_start_date = #{realStartDate}
+            </if>
+            <if test="realEndDate != null">
+                and real_end_date = #{realEndDate}
+            </if>
+            <if test="outputValue != null">
+                and output_value = #{outputValue}
+            </if>
+            <if test="realOutputValue != null">
+                and real_output_value = #{realOutputValue}
+            </if>
+            <if test="process != null and process != ''">
+                and process = #{process}
+            </if>
+            <if test="chargePerson != null and chargePerson != ''">
+                and charge_person = #{chargePerson}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="isMilestone != null and isMilestone != ''">
+                and is_milestone = #{isMilestone}
+            </if>
+            <if test="isRelevance != null and isRelevance != ''">
+                and is_relevance = #{isRelevance}
+            </if>
+            <if test="createUser != null and createUser != ''">
+                and create_user = #{createUser}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="modifier != null and modifier != ''">
+                and modifier = #{modifier}
+            </if>
+            <if test="modifyDateTime != null">
+                and modify_date_time = #{modifyDateTime}
+            </if>
+            <if test="sortedOrder != null">
+                and sorted_order = #{sortedOrder}
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                and del_flag = #{delFlag}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="orgId != null and orgId != ''">
+                and org_id = #{orgId}
+            </if>
+            <if test="isLeaf != null">
+                and is_leaf = #{isLeaf}
+            </if>
+            <if test="chargePersonId != null and chargePersonId != ''">
+                and charge_person_id = #{chargePersonId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into jd_plan_wbs(parent_id, project_id, project_code, section_id, section_code, wbs_instance_id, version_id, wbs_code, wbs_name, divide_type, struct_type, start_date, end_date, real_start_date, real_end_date, output_value, real_output_value, process, charge_person, status, is_milestone, is_relevance, create_user, create_time, modifier, modify_date_time, sorted_order, del_flag, remark, org_id, is_leaf, charge_person_id)
+        values (#{parentId}, #{projectId}, #{projectCode}, #{sectionId}, #{sectionCode}, #{wbsInstanceId}, #{versionId}, #{wbsCode}, #{wbsName}, #{divideType}, #{structType}, #{startDate}, #{endDate}, #{realStartDate}, #{realEndDate}, #{outputValue}, #{realOutputValue}, #{process}, #{chargePerson}, #{status}, #{isMilestone}, #{isRelevance}, #{createUser}, #{createTime}, #{modifier}, #{modifyDateTime}, #{sortedOrder}, #{delFlag}, #{remark}, #{orgId}, #{isLeaf}, #{chargePersonId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into jd_plan_wbs(parent_id, project_id, project_code, section_id, section_code, wbs_instance_id, version_id, wbs_code, wbs_name, divide_type, struct_type, start_date, end_date, real_start_date, real_end_date, output_value, real_output_value, process, charge_person, status, is_milestone, is_relevance, create_user, create_time, modifier, modify_date_time, sorted_order, del_flag, remark, org_id, is_leaf, charge_person_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.parentId}, #{entity.projectId}, #{entity.projectCode}, #{entity.sectionId}, #{entity.sectionCode}, #{entity.wbsInstanceId}, #{entity.versionId}, #{entity.wbsCode}, #{entity.wbsName}, #{entity.divideType}, #{entity.structType}, #{entity.startDate}, #{entity.endDate}, #{entity.realStartDate}, #{entity.realEndDate}, #{entity.outputValue}, #{entity.realOutputValue}, #{entity.process}, #{entity.chargePerson}, #{entity.status}, #{entity.isMilestone}, #{entity.isRelevance}, #{entity.createUser}, #{entity.createTime}, #{entity.modifier}, #{entity.modifyDateTime}, #{entity.sortedOrder}, #{entity.delFlag}, #{entity.remark}, #{entity.orgId}, #{entity.isLeaf}, #{entity.chargePersonId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into jd_plan_wbs(parent_id, project_id, project_code, section_id, section_code, wbs_instance_id, version_id, wbs_code, wbs_name, divide_type, struct_type, start_date, end_date, real_start_date, real_end_date, output_value, real_output_value, process, charge_person, status, is_milestone, is_relevance, create_user, create_time, modifier, modify_date_time, sorted_order, del_flag, remark, org_id, is_leaf, charge_person_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.parentId}, #{entity.projectId}, #{entity.projectCode}, #{entity.sectionId}, #{entity.sectionCode}, #{entity.wbsInstanceId}, #{entity.versionId}, #{entity.wbsCode}, #{entity.wbsName}, #{entity.divideType}, #{entity.structType}, #{entity.startDate}, #{entity.endDate}, #{entity.realStartDate}, #{entity.realEndDate}, #{entity.outputValue}, #{entity.realOutputValue}, #{entity.process}, #{entity.chargePerson}, #{entity.status}, #{entity.isMilestone}, #{entity.isRelevance}, #{entity.createUser}, #{entity.createTime}, #{entity.modifier}, #{entity.modifyDateTime}, #{entity.sortedOrder}, #{entity.delFlag}, #{entity.remark}, #{entity.orgId}, #{entity.isLeaf}, #{entity.chargePersonId})
+        </foreach>
+        on duplicate key update
+        parent_id = values(parent_id),
+        project_id = values(project_id),
+        project_code = values(project_code),
+        section_id = values(section_id),
+        section_code = values(section_code),
+        wbs_instance_id = values(wbs_instance_id),
+        version_id = values(version_id),
+        wbs_code = values(wbs_code),
+        wbs_name = values(wbs_name),
+        divide_type = values(divide_type),
+        struct_type = values(struct_type),
+        start_date = values(start_date),
+        end_date = values(end_date),
+        real_start_date = values(real_start_date),
+        real_end_date = values(real_end_date),
+        output_value = values(output_value),
+        real_output_value = values(real_output_value),
+        process = values(process),
+        charge_person = values(charge_person),
+        status = values(status),
+        is_milestone = values(is_milestone),
+        is_relevance = values(is_relevance),
+        create_user = values(create_user),
+        create_time = values(create_time),
+        modifier = values(modifier),
+        modify_date_time = values(modify_date_time),
+        sorted_order = values(sorted_order),
+        del_flag = values(del_flag),
+        remark = values(remark),
+        org_id = values(org_id),
+        is_leaf = values(is_leaf),
+        charge_person_id = values(charge_person_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update jd_plan_wbs
+        <set>
+            <if test="parentId != null and parentId != ''">
+                parent_id = #{parentId},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="projectCode != null and projectCode != ''">
+                project_code = #{projectCode},
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                section_id = #{sectionId},
+            </if>
+            <if test="sectionCode != null and sectionCode != ''">
+                section_code = #{sectionCode},
+            </if>
+            <if test="wbsInstanceId != null and wbsInstanceId != ''">
+                wbs_instance_id = #{wbsInstanceId},
+            </if>
+            <if test="versionId != null and versionId != ''">
+                version_id = #{versionId},
+            </if>
+            <if test="wbsCode != null and wbsCode != ''">
+                wbs_code = #{wbsCode},
+            </if>
+            <if test="wbsName != null and wbsName != ''">
+                wbs_name = #{wbsName},
+            </if>
+            <if test="divideType != null and divideType != ''">
+                divide_type = #{divideType},
+            </if>
+            <if test="structType != null and structType != ''">
+                struct_type = #{structType},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="realStartDate != null">
+                real_start_date = #{realStartDate},
+            </if>
+            <if test="realEndDate != null">
+                real_end_date = #{realEndDate},
+            </if>
+            <if test="outputValue != null">
+                output_value = #{outputValue},
+            </if>
+            <if test="realOutputValue != null">
+                real_output_value = #{realOutputValue},
+            </if>
+            <if test="process != null and process != ''">
+                process = #{process},
+            </if>
+            <if test="chargePerson != null and chargePerson != ''">
+                charge_person = #{chargePerson},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="isMilestone != null and isMilestone != ''">
+                is_milestone = #{isMilestone},
+            </if>
+            <if test="isRelevance != null and isRelevance != ''">
+                is_relevance = #{isRelevance},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="modifier != null and modifier != ''">
+                modifier = #{modifier},
+            </if>
+            <if test="modifyDateTime != null">
+                modify_date_time = #{modifyDateTime},
+            </if>
+            <if test="sortedOrder != null">
+                sorted_order = #{sortedOrder},
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                del_flag = #{delFlag},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="orgId != null and orgId != ''">
+                org_id = #{orgId},
+            </if>
+            <if test="isLeaf != null">
+                is_leaf = #{isLeaf},
+            </if>
+            <if test="chargePersonId != null and chargePersonId != ''">
+                charge_person_id = #{chargePersonId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from jd_plan_wbs where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.TbTableSheetDao">
+
+    <resultMap type="com.security.entity.TbTableSheet" id="TbTableSheetMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectId" column="project_id" jdbcType="VARCHAR"/>
+        <result property="sheetData" column="sheet_data" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbTableSheetMap">
+        select
+          id, project_id, sheet_data, type, create_time
+        from tb_table_sheet
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbTableSheetMap">
+        select
+          id, project_id, sheet_data, type, create_time
+        from tb_table_sheet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="sheetData != null and sheetData != ''">
+                and sheet_data = #{sheetData}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from tb_table_sheet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="sheetData != null and sheetData != ''">
+                and sheet_data = #{sheetData}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_table_sheet(project_id, sheet_data, type, create_time)
+        values (#{projectId}, #{sheetData}, #{type}, #{createTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_table_sheet(project_id, sheet_data, type, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.projectId}, #{entity.sheetData}, #{entity.type}, #{entity.createTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_table_sheet(project_id, sheet_data, type, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.projectId}, #{entity.sheetData}, #{entity.type}, #{entity.createTime})
+        </foreach>
+        on duplicate key update
+        project_id = values(project_id),
+        sheet_data = values(sheet_data),
+        type = values(type),
+        create_time = values(create_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_table_sheet
+        <set>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="sheetData != null and sheetData != ''">
+                sheet_data = #{sheetData},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_table_sheet where id = #{id}
+    </delete>
+
+</mapper>
+

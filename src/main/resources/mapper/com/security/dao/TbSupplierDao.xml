@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.TbSupplierDao">
+
+    <resultMap type="com.security.entity.TbSupplier" id="TbSupplierMap">
+        <result property="supplierId" column="supplier_id" jdbcType="INTEGER"/>
+        <result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+        <result property="uniformCreditCode" column="uniform_credit_code" jdbcType="VARCHAR"/>
+        <result property="xtDictSupplier" column="xt_dict_supplier" jdbcType="VARCHAR"/>
+        <result property="provinces" column="provinces" jdbcType="VARCHAR"/>
+        <result property="detailedAddress" column="detailed_address" jdbcType="VARCHAR"/>
+        <result property="legalRepresentative" column="legal_representative" jdbcType="VARCHAR"/>
+        <result property="establishmentDate" column="establishment_date" jdbcType="TIMESTAMP"/>
+        <result property="registeredCapital" column="registered_capital" jdbcType="NUMERIC"/>
+        <result property="operatingPeriod" column="operating_period" jdbcType="VARCHAR"/>
+        <result property="businessLicense" column="business_license" jdbcType="VARCHAR"/>
+        <result property="xtDictRating" column="xt_dict_rating" jdbcType="VARCHAR"/>
+        <result property="performance" column="performance" jdbcType="VARCHAR"/>
+        <result property="scale" column="scale" jdbcType="VARCHAR"/>
+        <result property="certification" column="certification" jdbcType="VARCHAR"/>
+        <result property="supplierProfile" column="supplier_profile" jdbcType="VARCHAR"/>
+        <result property="approvalState" column="approval_state" jdbcType="VARCHAR"/>
+        <result property="blackFlag" column="black_flag" jdbcType="VARCHAR"/>
+        <result property="blackRemark" column="black_remark" jdbcType="VARCHAR"/>
+        <result property="approvalFlag" column="approval_flag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbSupplierMap">
+        select
+          supplier_id, supplier_name, uniform_credit_code, xt_dict_supplier, provinces, detailed_address, legal_representative, establishment_date, registered_capital, operating_period, business_license, xt_dict_rating, performance, scale, certification, supplier_profile, approval_state, black_flag, black_remark, approval_flag
+        from tb_supplier
+        where supplier_id = #{supplierId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbSupplierMap">
+        select
+          supplier_id, supplier_name, uniform_credit_code, xt_dict_supplier, provinces, detailed_address, legal_representative, establishment_date, registered_capital, operating_period, business_license, xt_dict_rating, performance, scale, certification, supplier_profile, approval_state, black_flag, black_remark, approval_flag
+        from tb_supplier
+        <where>
+            <if test="supplierId != null">
+                and supplier_id = #{supplierId}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name = #{supplierName}
+            </if>
+            <if test="uniformCreditCode != null and uniformCreditCode != ''">
+                and uniform_credit_code = #{uniformCreditCode}
+            </if>
+            <if test="xtDictSupplier != null and xtDictSupplier != ''">
+                and xt_dict_supplier = #{xtDictSupplier}
+            </if>
+            <if test="provinces != null and provinces != ''">
+                and provinces = #{provinces}
+            </if>
+            <if test="detailedAddress != null and detailedAddress != ''">
+                and detailed_address = #{detailedAddress}
+            </if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">
+                and legal_representative = #{legalRepresentative}
+            </if>
+            <if test="establishmentDate != null">
+                and establishment_date = #{establishmentDate}
+            </if>
+            <if test="registeredCapital != null">
+                and registered_capital = #{registeredCapital}
+            </if>
+            <if test="operatingPeriod != null and operatingPeriod != ''">
+                and operating_period = #{operatingPeriod}
+            </if>
+            <if test="businessLicense != null and businessLicense != ''">
+                and business_license = #{businessLicense}
+            </if>
+            <if test="xtDictRating != null and xtDictRating != ''">
+                and xt_dict_rating = #{xtDictRating}
+            </if>
+            <if test="performance != null and performance != ''">
+                and performance = #{performance}
+            </if>
+            <if test="scale != null and scale != ''">
+                and scale = #{scale}
+            </if>
+            <if test="certification != null and certification != ''">
+                and certification = #{certification}
+            </if>
+            <if test="supplierProfile != null and supplierProfile != ''">
+                and supplier_profile = #{supplierProfile}
+            </if>
+            <if test="approvalState != null and approvalState != ''">
+                and approval_state = #{approvalState}
+            </if>
+            <if test="blackFlag != null and blackFlag != ''">
+                and black_flag = #{blackFlag}
+            </if>
+            <if test="blackRemark != null and blackRemark != ''">
+                and black_remark = #{blackRemark}
+            </if>
+            <if test="approvalFlag != null and approvalFlag != ''">
+                and approval_flag = #{approvalFlag}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from tb_supplier
+        <where>
+            <if test="supplierId != null">
+                and supplier_id = #{supplierId}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and supplier_name = #{supplierName}
+            </if>
+            <if test="uniformCreditCode != null and uniformCreditCode != ''">
+                and uniform_credit_code = #{uniformCreditCode}
+            </if>
+            <if test="xtDictSupplier != null and xtDictSupplier != ''">
+                and xt_dict_supplier = #{xtDictSupplier}
+            </if>
+            <if test="provinces != null and provinces != ''">
+                and provinces = #{provinces}
+            </if>
+            <if test="detailedAddress != null and detailedAddress != ''">
+                and detailed_address = #{detailedAddress}
+            </if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">
+                and legal_representative = #{legalRepresentative}
+            </if>
+            <if test="establishmentDate != null">
+                and establishment_date = #{establishmentDate}
+            </if>
+            <if test="registeredCapital != null">
+                and registered_capital = #{registeredCapital}
+            </if>
+            <if test="operatingPeriod != null and operatingPeriod != ''">
+                and operating_period = #{operatingPeriod}
+            </if>
+            <if test="businessLicense != null and businessLicense != ''">
+                and business_license = #{businessLicense}
+            </if>
+            <if test="xtDictRating != null and xtDictRating != ''">
+                and xt_dict_rating = #{xtDictRating}
+            </if>
+            <if test="performance != null and performance != ''">
+                and performance = #{performance}
+            </if>
+            <if test="scale != null and scale != ''">
+                and scale = #{scale}
+            </if>
+            <if test="certification != null and certification != ''">
+                and certification = #{certification}
+            </if>
+            <if test="supplierProfile != null and supplierProfile != ''">
+                and supplier_profile = #{supplierProfile}
+            </if>
+            <if test="approvalState != null and approvalState != ''">
+                and approval_state = #{approvalState}
+            </if>
+            <if test="blackFlag != null and blackFlag != ''">
+                and black_flag = #{blackFlag}
+            </if>
+            <if test="blackRemark != null and blackRemark != ''">
+                and black_remark = #{blackRemark}
+            </if>
+            <if test="approvalFlag != null and approvalFlag != ''">
+                and approval_flag = #{approvalFlag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="supplierId" useGeneratedKeys="true">
+        insert into tb_supplier(supplier_name, uniform_credit_code, xt_dict_supplier, provinces, detailed_address, legal_representative, establishment_date, registered_capital, operating_period, business_license, xt_dict_rating, performance, scale, certification, supplier_profile, approval_state, black_flag, black_remark, approval_flag)
+        values (#{supplierName}, #{uniformCreditCode}, #{xtDictSupplier}, #{provinces}, #{detailedAddress}, #{legalRepresentative}, #{establishmentDate}, #{registeredCapital}, #{operatingPeriod}, #{businessLicense}, #{xtDictRating}, #{performance}, #{scale}, #{certification}, #{supplierProfile}, #{approvalState}, #{blackFlag}, #{blackRemark}, #{approvalFlag})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="supplierId" useGeneratedKeys="true">
+        insert into tb_supplier(supplier_name, uniform_credit_code, xt_dict_supplier, provinces, detailed_address, legal_representative, establishment_date, registered_capital, operating_period, business_license, xt_dict_rating, performance, scale, certification, supplier_profile, approval_state, black_flag, black_remark, approval_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.supplierName}, #{entity.uniformCreditCode}, #{entity.xtDictSupplier}, #{entity.provinces}, #{entity.detailedAddress}, #{entity.legalRepresentative}, #{entity.establishmentDate}, #{entity.registeredCapital}, #{entity.operatingPeriod}, #{entity.businessLicense}, #{entity.xtDictRating}, #{entity.performance}, #{entity.scale}, #{entity.certification}, #{entity.supplierProfile}, #{entity.approvalState}, #{entity.blackFlag}, #{entity.blackRemark}, #{entity.approvalFlag})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="supplierId" useGeneratedKeys="true">
+        insert into tb_supplier(supplier_name, uniform_credit_code, xt_dict_supplier, provinces, detailed_address, legal_representative, establishment_date, registered_capital, operating_period, business_license, xt_dict_rating, performance, scale, certification, supplier_profile, approval_state, black_flag, black_remark, approval_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.supplierName}, #{entity.uniformCreditCode}, #{entity.xtDictSupplier}, #{entity.provinces}, #{entity.detailedAddress}, #{entity.legalRepresentative}, #{entity.establishmentDate}, #{entity.registeredCapital}, #{entity.operatingPeriod}, #{entity.businessLicense}, #{entity.xtDictRating}, #{entity.performance}, #{entity.scale}, #{entity.certification}, #{entity.supplierProfile}, #{entity.approvalState}, #{entity.blackFlag}, #{entity.blackRemark}, #{entity.approvalFlag})
+        </foreach>
+        on duplicate key update
+        supplier_name = values(supplier_name),
+        uniform_credit_code = values(uniform_credit_code),
+        xt_dict_supplier = values(xt_dict_supplier),
+        provinces = values(provinces),
+        detailed_address = values(detailed_address),
+        legal_representative = values(legal_representative),
+        establishment_date = values(establishment_date),
+        registered_capital = values(registered_capital),
+        operating_period = values(operating_period),
+        business_license = values(business_license),
+        xt_dict_rating = values(xt_dict_rating),
+        performance = values(performance),
+        scale = values(scale),
+        certification = values(certification),
+        supplier_profile = values(supplier_profile),
+        approval_state = values(approval_state),
+        black_flag = values(black_flag),
+        black_remark = values(black_remark),
+        approval_flag = values(approval_flag)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update tb_supplier
+        <set>
+            <if test="supplierName != null and supplierName != ''">
+                supplier_name = #{supplierName},
+            </if>
+            <if test="uniformCreditCode != null and uniformCreditCode != ''">
+                uniform_credit_code = #{uniformCreditCode},
+            </if>
+            <if test="xtDictSupplier != null and xtDictSupplier != ''">
+                xt_dict_supplier = #{xtDictSupplier},
+            </if>
+            <if test="provinces != null and provinces != ''">
+                provinces = #{provinces},
+            </if>
+            <if test="detailedAddress != null and detailedAddress != ''">
+                detailed_address = #{detailedAddress},
+            </if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">
+                legal_representative = #{legalRepresentative},
+            </if>
+            <if test="establishmentDate != null">
+                establishment_date = #{establishmentDate},
+            </if>
+            <if test="registeredCapital != null">
+                registered_capital = #{registeredCapital},
+            </if>
+            <if test="operatingPeriod != null and operatingPeriod != ''">
+                operating_period = #{operatingPeriod},
+            </if>
+            <if test="businessLicense != null and businessLicense != ''">
+                business_license = #{businessLicense},
+            </if>
+            <if test="xtDictRating != null and xtDictRating != ''">
+                xt_dict_rating = #{xtDictRating},
+            </if>
+            <if test="performance != null and performance != ''">
+                performance = #{performance},
+            </if>
+            <if test="scale != null and scale != ''">
+                scale = #{scale},
+            </if>
+            <if test="certification != null and certification != ''">
+                certification = #{certification},
+            </if>
+            <if test="supplierProfile != null and supplierProfile != ''">
+                supplier_profile = #{supplierProfile},
+            </if>
+            <if test="approvalState != null and approvalState != ''">
+                approval_state = #{approvalState},
+            </if>
+            <if test="blackFlag != null and blackFlag != ''">
+                black_flag = #{blackFlag},
+            </if>
+            <if test="blackRemark != null and blackRemark != ''">
+                black_remark = #{blackRemark},
+            </if>
+            <if test="approvalFlag != null and approvalFlag != ''">
+                approval_flag = #{approvalFlag},
+            </if>
+        </set>
+        where supplier_id = #{supplierId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_supplier where supplier_id = #{supplierId}
+    </delete>
+
+</mapper>
+

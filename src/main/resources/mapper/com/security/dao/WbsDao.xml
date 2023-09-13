@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.WbsDao">
+
+    <resultMap type="com.security.entity.Wbs" id="WbsMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="epid" column="epid" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+        <result property="projectId" column="project_id" jdbcType="VARCHAR"/>
+        <result property="sectionId" column="section_id" jdbcType="VARCHAR"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="num" column="num" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="sourceType" column="source_type" jdbcType="INTEGER"/>
+        <result property="visualScheduleType" column="visual_schedule_type" jdbcType="INTEGER"/>
+        <result property="wbsProperty" column="wbs_property" jdbcType="INTEGER"/>
+        <result property="wbsPropertyValue" column="wbs_property_value" jdbcType="VARCHAR"/>
+        <result property="pileStart" column="pile_start" jdbcType="VARCHAR"/>
+        <result property="pileEnd" column="pile_end" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <result property="projectTemplateId" column="project_template_id" jdbcType="VARCHAR"/>
+        <result property="isFocus" column="is_focus" jdbcType="INTEGER"/>
+        <result property="isRestrict" column="is_restrict" jdbcType="INTEGER"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+        <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="updateAt" column="update_at" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="inventoryTotalPrice" column="inventory_total_price" jdbcType="NUMERIC"/>
+        <result property="inventoryTotalNumber" column="inventory_total_number" jdbcType="NUMERIC"/>
+        <result property="pileCenter" column="pile_center" jdbcType="VARCHAR"/>
+        <result property="subgradeName" column="subgrade_name" jdbcType="VARCHAR"/>
+        <result property="interWorkingForm" column="inter_working_form" jdbcType="VARCHAR"/>
+        <result property="pathId" column="path_id" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="wbsStatus" column="wbs_status" jdbcType="INTEGER"/>
+        <result property="wbsBigCategory" column="wbs_big_category" jdbcType="INTEGER"/>
+        <result property="wbsMidCategory" column="wbs_mid_category" jdbcType="INTEGER"/>
+        <result property="wbsSmallCategory" column="wbs_small_category" jdbcType="INTEGER"/>
+        <result property="inspectStatus" column="inspect_status" jdbcType="INTEGER"/>
+        <result property="jgStatus" column="jg_status" jdbcType="INTEGER"/>
+     <!--   <collection property="formInstancesList" javaType="java.util.List"
+                    select="com.security.dao.WbsDao.selectFormInstances" column="id"/> -->
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="WbsMap">
+        select
+          id, epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status
+        from wbs
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="WbsMap">
+        select
+          id, epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status
+        from wbs
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="epid != null">
+                and epid = #{epid}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                and section_id = #{sectionId}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="num != null and num != ''">
+                and num = #{num}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="visualScheduleType != null">
+                and visual_schedule_type = #{visualScheduleType}
+            </if>
+            <if test="wbsProperty != null">
+                and wbs_property = #{wbsProperty}
+            </if>
+            <if test="wbsPropertyValue != null and wbsPropertyValue != ''">
+                and wbs_property_value = #{wbsPropertyValue}
+            </if>
+            <if test="pileStart != null and pileStart != ''">
+                and pile_start = #{pileStart}
+            </if>
+            <if test="pileEnd != null and pileEnd != ''">
+                and pile_end = #{pileEnd}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="projectTemplateId != null and projectTemplateId != ''">
+                and project_template_id = #{projectTemplateId}
+            </if>
+            <if test="isFocus != null">
+                and is_focus = #{isFocus}
+            </if>
+            <if test="isRestrict != null">
+                and is_restrict = #{isRestrict}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="createAt != null">
+                and create_at = #{createAt}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="inventoryTotalPrice != null">
+                and inventory_total_price = #{inventoryTotalPrice}
+            </if>
+            <if test="inventoryTotalNumber != null">
+                and inventory_total_number = #{inventoryTotalNumber}
+            </if>
+            <if test="pileCenter != null and pileCenter != ''">
+                and pile_center = #{pileCenter}
+            </if>
+            <if test="subgradeName != null and subgradeName != ''">
+                and subgrade_name = #{subgradeName}
+            </if>
+            <if test="interWorkingForm != null and interWorkingForm != ''">
+                and inter_working_form = #{interWorkingForm}
+            </if>
+            <if test="pathId != null and pathId != ''">
+                and path_id = #{pathId}
+            </if>
+            <if test="path != null and path != ''">
+                and path = #{path}
+            </if>
+            <if test="wbsStatus != null">
+                and wbs_status = #{wbsStatus}
+            </if>
+            <if test="wbsBigCategory != null">
+                and wbs_big_category = #{wbsBigCategory}
+            </if>
+            <if test="wbsMidCategory != null">
+                and wbs_mid_category = #{wbsMidCategory}
+            </if>
+            <if test="wbsSmallCategory != null">
+                and wbs_small_category = #{wbsSmallCategory}
+            </if>
+            <if test="inspectStatus != null">
+                and inspect_status = #{inspectStatus}
+            </if>
+            <if test="jgStatus != null">
+                and jg_status = #{jgStatus}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from wbs
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="epid != null">
+                and epid = #{epid}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                and section_id = #{sectionId}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="num != null and num != ''">
+                and num = #{num}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="visualScheduleType != null">
+                and visual_schedule_type = #{visualScheduleType}
+            </if>
+            <if test="wbsProperty != null">
+                and wbs_property = #{wbsProperty}
+            </if>
+            <if test="wbsPropertyValue != null and wbsPropertyValue != ''">
+                and wbs_property_value = #{wbsPropertyValue}
+            </if>
+            <if test="pileStart != null and pileStart != ''">
+                and pile_start = #{pileStart}
+            </if>
+            <if test="pileEnd != null and pileEnd != ''">
+                and pile_end = #{pileEnd}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="projectTemplateId != null and projectTemplateId != ''">
+                and project_template_id = #{projectTemplateId}
+            </if>
+            <if test="isFocus != null">
+                and is_focus = #{isFocus}
+            </if>
+            <if test="isRestrict != null">
+                and is_restrict = #{isRestrict}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="createAt != null">
+                and create_at = #{createAt}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="inventoryTotalPrice != null">
+                and inventory_total_price = #{inventoryTotalPrice}
+            </if>
+            <if test="inventoryTotalNumber != null">
+                and inventory_total_number = #{inventoryTotalNumber}
+            </if>
+            <if test="pileCenter != null and pileCenter != ''">
+                and pile_center = #{pileCenter}
+            </if>
+            <if test="subgradeName != null and subgradeName != ''">
+                and subgrade_name = #{subgradeName}
+            </if>
+            <if test="interWorkingForm != null and interWorkingForm != ''">
+                and inter_working_form = #{interWorkingForm}
+            </if>
+            <if test="pathId != null and pathId != ''">
+                and path_id = #{pathId}
+            </if>
+            <if test="path != null and path != ''">
+                and path = #{path}
+            </if>
+            <if test="wbsStatus != null">
+                and wbs_status = #{wbsStatus}
+            </if>
+            <if test="wbsBigCategory != null">
+                and wbs_big_category = #{wbsBigCategory}
+            </if>
+            <if test="wbsMidCategory != null">
+                and wbs_mid_category = #{wbsMidCategory}
+            </if>
+            <if test="wbsSmallCategory != null">
+                and wbs_small_category = #{wbsSmallCategory}
+            </if>
+            <if test="inspectStatus != null">
+                and inspect_status = #{inspectStatus}
+            </if>
+            <if test="jgStatus != null">
+                and jg_status = #{jgStatus}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into wbs(epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status)
+        values (#{epid}, #{parentId}, #{projectId}, #{sectionId}, #{code}, #{name}, #{num}, #{type}, #{sourceType}, #{visualScheduleType}, #{wbsProperty}, #{wbsPropertyValue}, #{pileStart}, #{pileEnd}, #{sort}, #{projectTemplateId}, #{isFocus}, #{isRestrict}, #{isDelete}, #{createAt}, #{createBy}, #{updateAt}, #{updateBy}, #{inventoryTotalPrice}, #{inventoryTotalNumber}, #{pileCenter}, #{subgradeName}, #{interWorkingForm}, #{pathId}, #{path}, #{wbsStatus}, #{wbsBigCategory}, #{wbsMidCategory}, #{wbsSmallCategory}, #{inspectStatus}, #{jgStatus})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into wbs(epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.epid}, #{entity.parentId}, #{entity.projectId}, #{entity.sectionId}, #{entity.code}, #{entity.name}, #{entity.num}, #{entity.type}, #{entity.sourceType}, #{entity.visualScheduleType}, #{entity.wbsProperty}, #{entity.wbsPropertyValue}, #{entity.pileStart}, #{entity.pileEnd}, #{entity.sort}, #{entity.projectTemplateId}, #{entity.isFocus}, #{entity.isRestrict}, #{entity.isDelete}, #{entity.createAt}, #{entity.createBy}, #{entity.updateAt}, #{entity.updateBy}, #{entity.inventoryTotalPrice}, #{entity.inventoryTotalNumber}, #{entity.pileCenter}, #{entity.subgradeName}, #{entity.interWorkingForm}, #{entity.pathId}, #{entity.path}, #{entity.wbsStatus}, #{entity.wbsBigCategory}, #{entity.wbsMidCategory}, #{entity.wbsSmallCategory}, #{entity.inspectStatus}, #{entity.jgStatus})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into wbs(epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.epid}, #{entity.parentId}, #{entity.projectId}, #{entity.sectionId}, #{entity.code}, #{entity.name}, #{entity.num}, #{entity.type}, #{entity.sourceType}, #{entity.visualScheduleType}, #{entity.wbsProperty}, #{entity.wbsPropertyValue}, #{entity.pileStart}, #{entity.pileEnd}, #{entity.sort}, #{entity.projectTemplateId}, #{entity.isFocus}, #{entity.isRestrict}, #{entity.isDelete}, #{entity.createAt}, #{entity.createBy}, #{entity.updateAt}, #{entity.updateBy}, #{entity.inventoryTotalPrice}, #{entity.inventoryTotalNumber}, #{entity.pileCenter}, #{entity.subgradeName}, #{entity.interWorkingForm}, #{entity.pathId}, #{entity.path}, #{entity.wbsStatus}, #{entity.wbsBigCategory}, #{entity.wbsMidCategory}, #{entity.wbsSmallCategory}, #{entity.inspectStatus}, #{entity.jgStatus})
+        </foreach>
+        on duplicate key update
+        epid = values(epid),
+        parent_id = values(parent_id),
+        project_id = values(project_id),
+        section_id = values(section_id),
+        code = values(code),
+        name = values(name),
+        num = values(num),
+        type = values(type),
+        source_type = values(source_type),
+        visual_schedule_type = values(visual_schedule_type),
+        wbs_property = values(wbs_property),
+        wbs_property_value = values(wbs_property_value),
+        pile_start = values(pile_start),
+        pile_end = values(pile_end),
+        sort = values(sort),
+        project_template_id = values(project_template_id),
+        is_focus = values(is_focus),
+        is_restrict = values(is_restrict),
+        is_delete = values(is_delete),
+        create_at = values(create_at),
+        create_by = values(create_by),
+        update_at = values(update_at),
+        update_by = values(update_by),
+        inventory_total_price = values(inventory_total_price),
+        inventory_total_number = values(inventory_total_number),
+        pile_center = values(pile_center),
+        subgrade_name = values(subgrade_name),
+        inter_working_form = values(inter_working_form),
+        path_id = values(path_id),
+        path = values(path),
+        wbs_status = values(wbs_status),
+        wbs_big_category = values(wbs_big_category),
+        wbs_mid_category = values(wbs_mid_category),
+        wbs_small_category = values(wbs_small_category),
+        inspect_status = values(inspect_status),
+        jg_status = values(jg_status)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update wbs
+        <set>
+            <if test="epid != null">
+                epid = #{epid},
+            </if>
+            <if test="parentId != null and parentId != ''">
+                parent_id = #{parentId},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                section_id = #{sectionId},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="num != null and num != ''">
+                num = #{num},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType},
+            </if>
+            <if test="visualScheduleType != null">
+                visual_schedule_type = #{visualScheduleType},
+            </if>
+            <if test="wbsProperty != null">
+                wbs_property = #{wbsProperty},
+            </if>
+            <if test="wbsPropertyValue != null and wbsPropertyValue != ''">
+                wbs_property_value = #{wbsPropertyValue},
+            </if>
+            <if test="pileStart != null and pileStart != ''">
+                pile_start = #{pileStart},
+            </if>
+            <if test="pileEnd != null and pileEnd != ''">
+                pile_end = #{pileEnd},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="projectTemplateId != null and projectTemplateId != ''">
+                project_template_id = #{projectTemplateId},
+            </if>
+            <if test="isFocus != null">
+                is_focus = #{isFocus},
+            </if>
+            <if test="isRestrict != null">
+                is_restrict = #{isRestrict},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="inventoryTotalPrice != null">
+                inventory_total_price = #{inventoryTotalPrice},
+            </if>
+            <if test="inventoryTotalNumber != null">
+                inventory_total_number = #{inventoryTotalNumber},
+            </if>
+            <if test="pileCenter != null and pileCenter != ''">
+                pile_center = #{pileCenter},
+            </if>
+            <if test="subgradeName != null and subgradeName != ''">
+                subgrade_name = #{subgradeName},
+            </if>
+            <if test="interWorkingForm != null and interWorkingForm != ''">
+                inter_working_form = #{interWorkingForm},
+            </if>
+            <if test="pathId != null and pathId != ''">
+                path_id = #{pathId},
+            </if>
+            <if test="path != null and path != ''">
+                path = #{path},
+            </if>
+            <if test="wbsStatus != null">
+                wbs_status = #{wbsStatus},
+            </if>
+            <if test="wbsBigCategory != null">
+                wbs_big_category = #{wbsBigCategory},
+            </if>
+            <if test="wbsMidCategory != null">
+                wbs_mid_category = #{wbsMidCategory},
+            </if>
+            <if test="wbsSmallCategory != null">
+                wbs_small_category = #{wbsSmallCategory},
+            </if>
+            <if test="inspectStatus != null">
+                inspect_status = #{inspectStatus},
+            </if>
+            <if test="jgStatus != null">
+                jg_status = #{jgStatus},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from wbs where id = #{id}
+    </delete>
+
+    <resultMap type="com.security.entity.RespData" id="selectWbsDetailTimeMap">
+        <result property="wbsId" column="id" />
+        <result property="projectName" column="short_name" />
+        <result property="sectionName" column="node_code" />
+        <result property="wbsName" column="name" />
+        <result property="parentId" column="parent_id" />
+        <result property="pileStart" column="pile_start" />
+        <result property="pileEnd" column="pile_end" />
+        <result property="type" column="type" />
+        <result property="projectTemplateId" column="project_template_id" />
+
+        <!--        <collection property="reportTime" javaType="string"
+                            select="com.security.dao.WbsDao.selectWorkstageWorkReport" column="parent_id" />-->
+        <collection property="firstCertificateTime" javaType="string"
+                    select="com.security.dao.WbsDao.selectMinTime" column="id"/>
+
+        <collection property="endCertificateTime" javaType="string"
+                    select="com.security.dao.WbsDao.selectMaxTime" column="id"/>
+
+        <collection property="formInstancesList" javaType="java.util.List"
+                select="com.security.dao.WbsDao.selectFormInstances" column="id"/>
+    </resultMap>
+
+    <select id="selectProjectIds" resultType="string">
+        select DISTINCT project_id from wbs
+<!-- where project_id = "b84d94b56e434a059acb24ca7cce2fac" -->
+    </select>
+
+    <select id="selectSectionIds" resultType="string">
+        select DISTINCT section_id from wbs where project_id = #{projectId}
+    </select>
+
+
+<!--  111111111111  -->
+    <select id="selectFormInstances" resultType="com.security.entity.FormInstances">
+        select
+            id, tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at
+        from form_instances
+        where project_node_id = #{projectNodeId}
+        order by supervision_time
+    </select>
+
+    <select id="selectFormInstancesAll" resultType="com.security.entity.FormInstances">
+        select
+            id, tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at
+        from form_instances
+    </select>
+
+    <select id="selectMinTime" resultType="string">
+        select min(complete_date) from workstage_jg_certificate where node_id = #{nodeId}
+    </select>
+
+    <select id="selectMaxTime" resultType="string">
+        select max(complete_date) from workstage_jg_certificate where node_id = #{nodeId}
+    </select>
+
+    <select id="selectWorkstageWorkReport" resultType="string">
+        select adv_start_date from workstage_work_report where node_id = #{nodeId}
+    </select>
+
+<!--  111111111111  -->
+
+    <select id="selectWbsDetailTime" resultMap="selectWbsDetailTimeMap">
+        select
+            bidi.short_name,
+            bui.node_code,
+            wbs.name,
+            wbs.id,
+            wbs.parent_id,
+            wbs.pile_start,
+            wbs.pile_end,
+            wbs.type,
+            wbs.project_template_id
+        from wbs as wbs
+        left join builder_infra_dept_info as bidi on wbs.project_id = bidi.dept_id
+        left join builder_unit_info as bui on wbs.section_id = bui.node_id
+        where wbs.section_id in
+        <foreach item="sectionId" collection="sectionIds" open="(" separator="," close=")">
+            #{sectionId}
+        </foreach>
+
+
+    </select>
+
+    <insert id="insertTime" keyProperty="id" useGeneratedKeys="true">
+        insert into time(project_name, section_name, wbs_name, num, type, wbs_id, project_template_id, pile_start, pile_end, report_time, first_supervision_time, end_supervision_time, first_certificate_time, end_certificate_time, name_and_days, days)
+        values (#{projectName}, #{sectionName}, #{wbsName}, #{num}, #{type}, #{wbsId}, #{projectTemplateId}, #{pileStart}, #{pileEnd}, #{reportTime}, #{firstSupervisionTime}, #{endSupervisionTime}, #{firstCertificateTime}, #{endCertificateTime}, #{nameAndDays}, #{days})
+    </insert>
+
+    <insert id="insertTimeForJson" keyProperty="id" useGeneratedKeys="true">
+        insert into time(project_name, section_name, wbs_name, num, type, wbs_id, project_template_id, pile_start, pile_end, report_time, first_supervision_time, end_supervision_time, first_certificate_time, end_certificate_time, name_and_days,json_name_and_days, days, meter)
+        values (#{projectName}, #{sectionName}, #{wbsName}, #{num}, #{type}, #{wbsId}, #{projectTemplateId}, #{pileStart}, #{pileEnd}, #{reportTime}, #{firstSupervisionTime}, #{endSupervisionTime}, #{firstCertificateTime}, #{endCertificateTime}, #{nameAndDays}, #{jsonNameAndDays}, #{days}, #{meter})
+    </insert>
+
+    <insert id="insertCodeAndDayAndMeter" keyProperty="id" useGeneratedKeys="true">
+        insert into code(code, day, meter)
+        values (#{code}, #{day}, #{meter})
+    </insert>
+
+    <select id="getFU" resultType="com.security.entity.FuYuZi">
+        select
+        num,
+        parent_id
+        from wbs
+        where id = #{parentId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllWbs" resultMap="WbsMap">
+        select
+        id, epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status
+        from wbs where type = "5"
+    </select>
+
+    <resultMap type="com.security.entity.RespData" id="selectWbsDetailTimeMap2">
+        <result property="wbsId" column="id" />
+        <result property="projectName" column="short_name" />
+        <result property="sectionName" column="node_code" />
+        <result property="wbsName" column="name" />
+        <result property="parentId" column="parent_id" />
+        <result property="pileStart" column="pile_start" />
+        <result property="pileEnd" column="pile_end" />
+        <result property="type" column="type" />
+        <result property="projectTemplateId" column="project_template_id" />
+    </resultMap>
+
+    <select id="queryAllWbsRespData" resultMap="selectWbsDetailTimeMap2">
+        select
+            bidi.short_name,
+            bui.node_code,
+            wbs.name,
+            wbs.id,
+            wbs.parent_id,
+            wbs.pile_start,
+            wbs.pile_end,
+            wbs.type,
+            wbs.project_template_id
+        from wbs as wbs
+                 left join builder_infra_dept_info as bidi on wbs.project_id = bidi.dept_id
+                 left join builder_unit_info as bui on wbs.section_id = bui.node_id
+        where wbs.type = "5"
+    </select>
+
+    <insert id="insertBatch1" keyProperty="id" useGeneratedKeys="true">
+        insert into wbs1(epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status, meter)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.epid}, #{entity.parentId}, #{entity.projectId}, #{entity.sectionId}, #{entity.code}, #{entity.name}, #{entity.num}, #{entity.type}, #{entity.sourceType}, #{entity.visualScheduleType}, #{entity.wbsProperty}, #{entity.wbsPropertyValue}, #{entity.pileStart}, #{entity.pileEnd}, #{entity.sort}, #{entity.projectTemplateId}, #{entity.isFocus}, #{entity.isRestrict}, #{entity.isDelete}, #{entity.createAt}, #{entity.createBy}, #{entity.updateAt}, #{entity.updateBy}, #{entity.inventoryTotalPrice}, #{entity.inventoryTotalNumber}, #{entity.pileCenter}, #{entity.subgradeName}, #{entity.interWorkingForm}, #{entity.pathId}, #{entity.path}, #{entity.wbsStatus}, #{entity.wbsBigCategory}, #{entity.wbsMidCategory}, #{entity.wbsSmallCategory}, #{entity.inspectStatus}, #{entity.jgStatus}), #{entity.meter})
+        </foreach>
+    </insert>
+
+    <insert id="insertWbs1" >
+        insert into wbs1(id, epid, parent_id, project_id, section_id, code, name, num, type, source_type, visual_schedule_type, wbs_property, wbs_property_value, pile_start, pile_end, sort, project_template_id, is_focus, is_restrict, is_delete, create_at, create_by, update_at, update_by, inventory_total_price, inventory_total_number, pile_center, subgrade_name, inter_working_form, path_id, path, wbs_status, wbs_big_category, wbs_mid_category, wbs_small_category, inspect_status, jg_status, meter)
+        values (#{id}, #{epid}, #{parentId}, #{projectId}, #{sectionId}, #{code}, #{name}, #{num}, #{type}, #{sourceType}, #{visualScheduleType}, #{wbsProperty}, #{wbsPropertyValue}, #{pileStart}, #{pileEnd}, #{sort}, #{projectTemplateId}, #{isFocus}, #{isRestrict}, #{isDelete}, #{createAt}, #{createBy}, #{updateAt}, #{updateBy}, #{inventoryTotalPrice}, #{inventoryTotalNumber}, #{pileCenter}, #{subgradeName}, #{interWorkingForm}, #{pathId}, #{path}, #{wbsStatus}, #{wbsBigCategory}, #{wbsMidCategory}, #{wbsSmallCategory}, #{inspectStatus}, #{jgStatus}, #{meter})
+    </insert>
+
+    <select id="selectTime" resultType="com.security.entity.RespData">
+        select id,project_name,section_name,wbs_name,num,type,wbs_id,project_template_id,pile_start,pile_end,report_time,report_time,first_supervision_time,end_supervision_time,
+               first_certificate_time,end_certificate_time,name_and_days,json_name_and_days,days,meter from time
+    </select>
+
+    <insert id="insertProcessJsonStr" >
+        insert into process_json(code, process_json_str)
+        values (#{code}, #{processJsonStr})
+    </insert>
+</mapper>
+

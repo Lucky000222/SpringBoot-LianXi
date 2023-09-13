@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.security.dao.FormInstancesDao">
+
+    <resultMap type="com.security.entity.FormInstances" id="FormInstancesMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="tenantId" column="tenant_id" jdbcType="INTEGER"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>
+        <result property="lastModifiedBy" column="last_modified_by" jdbcType="VARCHAR"/>
+        <result property="lastModifiedDate" column="last_modified_date" jdbcType="TIMESTAMP"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="NUMERIC"/>
+        <result property="claimer" column="claimer" jdbcType="VARCHAR"/>
+        <result property="classifier" column="classifier" jdbcType="VARCHAR"/>
+        <result property="deadline" column="deadline" jdbcType="TIMESTAMP"/>
+        <result property="formId" column="form_id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="percent" column="percent" jdbcType="VARCHAR"/>
+        <result property="position" column="position" jdbcType="VARCHAR"/>
+        <result property="processInstanceId" column="process_instance_id" jdbcType="VARCHAR"/>
+        <result property="projectId" column="project_id" jdbcType="VARCHAR"/>
+        <result property="projectNodeId" column="project_node_id" jdbcType="VARCHAR"/>
+        <result property="qualified" column="qualified" jdbcType="INTEGER"/>
+        <result property="sectionId" column="section_id" jdbcType="VARCHAR"/>
+        <result property="startDate" column="start_date" jdbcType="TIMESTAMP"/>
+        <result property="starter" column="starter" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="supervisionTime" column="supervision_time" jdbcType="TIMESTAMP"/>
+        <result property="templateDbId" column="template_db_id" jdbcType="INTEGER"/>
+        <result property="templateDbName" column="template_db_name" jdbcType="VARCHAR"/>
+        <result property="templateId" column="template_id" jdbcType="VARCHAR"/>
+        <result property="templateName" column="template_name" jdbcType="VARCHAR"/>
+        <result property="totalAmount" column="total_amount" jdbcType="NUMERIC"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="weight" column="weight" jdbcType="INTEGER"/>
+        <result property="workStageId" column="work_stage_id" jdbcType="VARCHAR"/>
+        <result property="documentId" column="document_id" jdbcType="INTEGER"/>
+        <result property="workStageName" column="work_stage_name" jdbcType="VARCHAR"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="sectionName" column="section_name" jdbcType="VARCHAR"/>
+        <result property="projectNodeName" column="project_node_name" jdbcType="VARCHAR"/>
+        <result property="endDate" column="end_date" jdbcType="TIMESTAMP"/>
+        <result property="subItemAmount" column="sub_item_amount" jdbcType="NUMERIC"/>
+        <result property="workStageAmount" column="work_stage_amount" jdbcType="NUMERIC"/>
+        <result property="workStagePercent" column="work_stage_percent" jdbcType="INTEGER"/>
+        <result property="attachmentSize" column="attachment_size" jdbcType="INTEGER"/>
+        <result property="ifContinue" column="if_continue" jdbcType="INTEGER"/>
+        <result property="code" column="code" jdbcType="VARCHAR"/>
+        <result property="totalPercent" column="total_percent" jdbcType="NUMERIC"/>
+        <result property="approveRemark" column="approve_remark" jdbcType="VARCHAR"/>
+        <result property="audioPerson" column="audio_person" jdbcType="VARCHAR"/>
+        <result property="wbsWorkstagePositionId" column="wbs_workstage_position_id" jdbcType="VARCHAR"/>
+        <result property="attachUpdateBy" column="attach_update_by" jdbcType="VARCHAR"/>
+        <result property="attachUpdateAt" column="attach_update_at" jdbcType="TIMESTAMP"/>
+        <result property="qualityProveRemark" column="quality_prove_remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FormInstancesMap">
+        select
+          id, tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at, quality_prove_remark
+        from form_instances
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FormInstancesMap">
+        select
+          id, tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at, quality_prove_remark
+        from form_instances
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="createdDate != null">
+                and created_date = #{createdDate}
+            </if>
+            <if test="lastModifiedBy != null and lastModifiedBy != ''">
+                and last_modified_by = #{lastModifiedBy}
+            </if>
+            <if test="lastModifiedDate != null">
+                and last_modified_date = #{lastModifiedDate}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="claimer != null and claimer != ''">
+                and claimer = #{claimer}
+            </if>
+            <if test="classifier != null and classifier != ''">
+                and classifier = #{classifier}
+            </if>
+            <if test="deadline != null">
+                and deadline = #{deadline}
+            </if>
+            <if test="formId != null and formId != ''">
+                and form_id = #{formId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="percent != null and percent != ''">
+                and percent = #{percent}
+            </if>
+            <if test="position != null and position != ''">
+                and position = #{position}
+            </if>
+            <if test="processInstanceId != null and processInstanceId != ''">
+                and process_instance_id = #{processInstanceId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectNodeId != null and projectNodeId != ''">
+                and project_node_id = #{projectNodeId}
+            </if>
+            <if test="qualified != null">
+                and qualified = #{qualified}
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                and section_id = #{sectionId}
+            </if>
+            <if test="startDate != null">
+                and start_date = #{startDate}
+            </if>
+            <if test="starter != null and starter != ''">
+                and starter = #{starter}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="supervisionTime != null">
+                and supervision_time = #{supervisionTime}
+            </if>
+            <if test="templateDbId != null">
+                and template_db_id = #{templateDbId}
+            </if>
+            <if test="templateDbName != null and templateDbName != ''">
+                and template_db_name = #{templateDbName}
+            </if>
+            <if test="templateId != null and templateId != ''">
+                and template_id = #{templateId}
+            </if>
+            <if test="templateName != null and templateName != ''">
+                and template_name = #{templateName}
+            </if>
+            <if test="totalAmount != null">
+                and total_amount = #{totalAmount}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="weight != null">
+                and weight = #{weight}
+            </if>
+            <if test="workStageId != null and workStageId != ''">
+                and work_stage_id = #{workStageId}
+            </if>
+            <if test="documentId != null">
+                and document_id = #{documentId}
+            </if>
+            <if test="workStageName != null and workStageName != ''">
+                and work_stage_name = #{workStageName}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="sectionName != null and sectionName != ''">
+                and section_name = #{sectionName}
+            </if>
+            <if test="projectNodeName != null and projectNodeName != ''">
+                and project_node_name = #{projectNodeName}
+            </if>
+            <if test="endDate != null">
+                and end_date = #{endDate}
+            </if>
+            <if test="subItemAmount != null">
+                and sub_item_amount = #{subItemAmount}
+            </if>
+            <if test="workStageAmount != null">
+                and work_stage_amount = #{workStageAmount}
+            </if>
+            <if test="workStagePercent != null">
+                and work_stage_percent = #{workStagePercent}
+            </if>
+            <if test="attachmentSize != null">
+                and attachment_size = #{attachmentSize}
+            </if>
+            <if test="ifContinue != null">
+                and if_continue = #{ifContinue}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="totalPercent != null">
+                and total_percent = #{totalPercent}
+            </if>
+            <if test="approveRemark != null and approveRemark != ''">
+                and approve_remark = #{approveRemark}
+            </if>
+            <if test="audioPerson != null and audioPerson != ''">
+                and audio_person = #{audioPerson}
+            </if>
+            <if test="wbsWorkstagePositionId != null and wbsWorkstagePositionId != ''">
+                and wbs_workstage_position_id = #{wbsWorkstagePositionId}
+            </if>
+            <if test="attachUpdateBy != null and attachUpdateBy != ''">
+                and attach_update_by = #{attachUpdateBy}
+            </if>
+            <if test="attachUpdateAt != null">
+                and attach_update_at = #{attachUpdateAt}
+            </if>
+            <if test="qualityProveRemark != null and qualityProveRemark != ''">
+                and quality_prove_remark = #{qualityProveRemark}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from form_instances
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="tenantId != null">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="createdDate != null">
+                and created_date = #{createdDate}
+            </if>
+            <if test="lastModifiedBy != null and lastModifiedBy != ''">
+                and last_modified_by = #{lastModifiedBy}
+            </if>
+            <if test="lastModifiedDate != null">
+                and last_modified_date = #{lastModifiedDate}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="claimer != null and claimer != ''">
+                and claimer = #{claimer}
+            </if>
+            <if test="classifier != null and classifier != ''">
+                and classifier = #{classifier}
+            </if>
+            <if test="deadline != null">
+                and deadline = #{deadline}
+            </if>
+            <if test="formId != null and formId != ''">
+                and form_id = #{formId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="percent != null and percent != ''">
+                and percent = #{percent}
+            </if>
+            <if test="position != null and position != ''">
+                and position = #{position}
+            </if>
+            <if test="processInstanceId != null and processInstanceId != ''">
+                and process_instance_id = #{processInstanceId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId}
+            </if>
+            <if test="projectNodeId != null and projectNodeId != ''">
+                and project_node_id = #{projectNodeId}
+            </if>
+            <if test="qualified != null">
+                and qualified = #{qualified}
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                and section_id = #{sectionId}
+            </if>
+            <if test="startDate != null">
+                and start_date = #{startDate}
+            </if>
+            <if test="starter != null and starter != ''">
+                and starter = #{starter}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="supervisionTime != null">
+                and supervision_time = #{supervisionTime}
+            </if>
+            <if test="templateDbId != null">
+                and template_db_id = #{templateDbId}
+            </if>
+            <if test="templateDbName != null and templateDbName != ''">
+                and template_db_name = #{templateDbName}
+            </if>
+            <if test="templateId != null and templateId != ''">
+                and template_id = #{templateId}
+            </if>
+            <if test="templateName != null and templateName != ''">
+                and template_name = #{templateName}
+            </if>
+            <if test="totalAmount != null">
+                and total_amount = #{totalAmount}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="weight != null">
+                and weight = #{weight}
+            </if>
+            <if test="workStageId != null and workStageId != ''">
+                and work_stage_id = #{workStageId}
+            </if>
+            <if test="documentId != null">
+                and document_id = #{documentId}
+            </if>
+            <if test="workStageName != null and workStageName != ''">
+                and work_stage_name = #{workStageName}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="sectionName != null and sectionName != ''">
+                and section_name = #{sectionName}
+            </if>
+            <if test="projectNodeName != null and projectNodeName != ''">
+                and project_node_name = #{projectNodeName}
+            </if>
+            <if test="endDate != null">
+                and end_date = #{endDate}
+            </if>
+            <if test="subItemAmount != null">
+                and sub_item_amount = #{subItemAmount}
+            </if>
+            <if test="workStageAmount != null">
+                and work_stage_amount = #{workStageAmount}
+            </if>
+            <if test="workStagePercent != null">
+                and work_stage_percent = #{workStagePercent}
+            </if>
+            <if test="attachmentSize != null">
+                and attachment_size = #{attachmentSize}
+            </if>
+            <if test="ifContinue != null">
+                and if_continue = #{ifContinue}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="totalPercent != null">
+                and total_percent = #{totalPercent}
+            </if>
+            <if test="approveRemark != null and approveRemark != ''">
+                and approve_remark = #{approveRemark}
+            </if>
+            <if test="audioPerson != null and audioPerson != ''">
+                and audio_person = #{audioPerson}
+            </if>
+            <if test="wbsWorkstagePositionId != null and wbsWorkstagePositionId != ''">
+                and wbs_workstage_position_id = #{wbsWorkstagePositionId}
+            </if>
+            <if test="attachUpdateBy != null and attachUpdateBy != ''">
+                and attach_update_by = #{attachUpdateBy}
+            </if>
+            <if test="attachUpdateAt != null">
+                and attach_update_at = #{attachUpdateAt}
+            </if>
+            <if test="qualityProveRemark != null and qualityProveRemark != ''">
+                and quality_prove_remark = #{qualityProveRemark}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into form_instances(tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at, quality_prove_remark)
+        values (#{tenantId}, #{createdBy}, #{createdDate}, #{lastModifiedBy}, #{lastModifiedDate}, #{version}, #{amount}, #{claimer}, #{classifier}, #{deadline}, #{formId}, #{name}, #{percent}, #{position}, #{processInstanceId}, #{projectId}, #{projectNodeId}, #{qualified}, #{sectionId}, #{startDate}, #{starter}, #{status}, #{supervisionTime}, #{templateDbId}, #{templateDbName}, #{templateId}, #{templateName}, #{totalAmount}, #{type}, #{weight}, #{workStageId}, #{documentId}, #{workStageName}, #{projectName}, #{sectionName}, #{projectNodeName}, #{endDate}, #{subItemAmount}, #{workStageAmount}, #{workStagePercent}, #{attachmentSize}, #{ifContinue}, #{code}, #{totalPercent}, #{approveRemark}, #{audioPerson}, #{wbsWorkstagePositionId}, #{attachUpdateBy}, #{attachUpdateAt}, #{qualityProveRemark})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into form_instances(tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at, quality_prove_remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.tenantId}, #{entity.createdBy}, #{entity.createdDate}, #{entity.lastModifiedBy}, #{entity.lastModifiedDate}, #{entity.version}, #{entity.amount}, #{entity.claimer}, #{entity.classifier}, #{entity.deadline}, #{entity.formId}, #{entity.name}, #{entity.percent}, #{entity.position}, #{entity.processInstanceId}, #{entity.projectId}, #{entity.projectNodeId}, #{entity.qualified}, #{entity.sectionId}, #{entity.startDate}, #{entity.starter}, #{entity.status}, #{entity.supervisionTime}, #{entity.templateDbId}, #{entity.templateDbName}, #{entity.templateId}, #{entity.templateName}, #{entity.totalAmount}, #{entity.type}, #{entity.weight}, #{entity.workStageId}, #{entity.documentId}, #{entity.workStageName}, #{entity.projectName}, #{entity.sectionName}, #{entity.projectNodeName}, #{entity.endDate}, #{entity.subItemAmount}, #{entity.workStageAmount}, #{entity.workStagePercent}, #{entity.attachmentSize}, #{entity.ifContinue}, #{entity.code}, #{entity.totalPercent}, #{entity.approveRemark}, #{entity.audioPerson}, #{entity.wbsWorkstagePositionId}, #{entity.attachUpdateBy}, #{entity.attachUpdateAt}, #{entity.qualityProveRemark})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into form_instances(tenant_id, created_by, created_date, last_modified_by, last_modified_date, version, amount, claimer, classifier, deadline, form_id, name, percent, position, process_instance_id, project_id, project_node_id, qualified, section_id, start_date, starter, status, supervision_time, template_db_id, template_db_name, template_id, template_name, total_amount, type, weight, work_stage_id, document_id, work_stage_name, project_name, section_name, project_node_name, end_date, sub_item_amount, work_stage_amount, work_stage_percent, attachment_size, if_continue, code, total_percent, approve_remark, audio_person, wbs_workstage_position_id, attach_update_by, attach_update_at, quality_prove_remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.tenantId}, #{entity.createdBy}, #{entity.createdDate}, #{entity.lastModifiedBy}, #{entity.lastModifiedDate}, #{entity.version}, #{entity.amount}, #{entity.claimer}, #{entity.classifier}, #{entity.deadline}, #{entity.formId}, #{entity.name}, #{entity.percent}, #{entity.position}, #{entity.processInstanceId}, #{entity.projectId}, #{entity.projectNodeId}, #{entity.qualified}, #{entity.sectionId}, #{entity.startDate}, #{entity.starter}, #{entity.status}, #{entity.supervisionTime}, #{entity.templateDbId}, #{entity.templateDbName}, #{entity.templateId}, #{entity.templateName}, #{entity.totalAmount}, #{entity.type}, #{entity.weight}, #{entity.workStageId}, #{entity.documentId}, #{entity.workStageName}, #{entity.projectName}, #{entity.sectionName}, #{entity.projectNodeName}, #{entity.endDate}, #{entity.subItemAmount}, #{entity.workStageAmount}, #{entity.workStagePercent}, #{entity.attachmentSize}, #{entity.ifContinue}, #{entity.code}, #{entity.totalPercent}, #{entity.approveRemark}, #{entity.audioPerson}, #{entity.wbsWorkstagePositionId}, #{entity.attachUpdateBy}, #{entity.attachUpdateAt}, #{entity.qualityProveRemark})
+        </foreach>
+        on duplicate key update
+        tenant_id = values(tenant_id),
+        created_by = values(created_by),
+        created_date = values(created_date),
+        last_modified_by = values(last_modified_by),
+        last_modified_date = values(last_modified_date),
+        version = values(version),
+        amount = values(amount),
+        claimer = values(claimer),
+        classifier = values(classifier),
+        deadline = values(deadline),
+        form_id = values(form_id),
+        name = values(name),
+        percent = values(percent),
+        position = values(position),
+        process_instance_id = values(process_instance_id),
+        project_id = values(project_id),
+        project_node_id = values(project_node_id),
+        qualified = values(qualified),
+        section_id = values(section_id),
+        start_date = values(start_date),
+        starter = values(starter),
+        status = values(status),
+        supervision_time = values(supervision_time),
+        template_db_id = values(template_db_id),
+        template_db_name = values(template_db_name),
+        template_id = values(template_id),
+        template_name = values(template_name),
+        total_amount = values(total_amount),
+        type = values(type),
+        weight = values(weight),
+        work_stage_id = values(work_stage_id),
+        document_id = values(document_id),
+        work_stage_name = values(work_stage_name),
+        project_name = values(project_name),
+        section_name = values(section_name),
+        project_node_name = values(project_node_name),
+        end_date = values(end_date),
+        sub_item_amount = values(sub_item_amount),
+        work_stage_amount = values(work_stage_amount),
+        work_stage_percent = values(work_stage_percent),
+        attachment_size = values(attachment_size),
+        if_continue = values(if_continue),
+        code = values(code),
+        total_percent = values(total_percent),
+        approve_remark = values(approve_remark),
+        audio_person = values(audio_person),
+        wbs_workstage_position_id = values(wbs_workstage_position_id),
+        attach_update_by = values(attach_update_by),
+        attach_update_at = values(attach_update_at),
+        quality_prove_remark = values(quality_prove_remark)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update form_instances
+        <set>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="createdDate != null">
+                created_date = #{createdDate},
+            </if>
+            <if test="lastModifiedBy != null and lastModifiedBy != ''">
+                last_modified_by = #{lastModifiedBy},
+            </if>
+            <if test="lastModifiedDate != null">
+                last_modified_date = #{lastModifiedDate},
+            </if>
+            <if test="version != null">
+                version = #{version},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="claimer != null and claimer != ''">
+                claimer = #{claimer},
+            </if>
+            <if test="classifier != null and classifier != ''">
+                classifier = #{classifier},
+            </if>
+            <if test="deadline != null">
+                deadline = #{deadline},
+            </if>
+            <if test="formId != null and formId != ''">
+                form_id = #{formId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="percent != null and percent != ''">
+                percent = #{percent},
+            </if>
+            <if test="position != null and position != ''">
+                position = #{position},
+            </if>
+            <if test="processInstanceId != null and processInstanceId != ''">
+                process_instance_id = #{processInstanceId},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id = #{projectId},
+            </if>
+            <if test="projectNodeId != null and projectNodeId != ''">
+                project_node_id = #{projectNodeId},
+            </if>
+            <if test="qualified != null">
+                qualified = #{qualified},
+            </if>
+            <if test="sectionId != null and sectionId != ''">
+                section_id = #{sectionId},
+            </if>
+            <if test="startDate != null">
+                start_date = #{startDate},
+            </if>
+            <if test="starter != null and starter != ''">
+                starter = #{starter},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="supervisionTime != null">
+                supervision_time = #{supervisionTime},
+            </if>
+            <if test="templateDbId != null">
+                template_db_id = #{templateDbId},
+            </if>
+            <if test="templateDbName != null and templateDbName != ''">
+                template_db_name = #{templateDbName},
+            </if>
+            <if test="templateId != null and templateId != ''">
+                template_id = #{templateId},
+            </if>
+            <if test="templateName != null and templateName != ''">
+                template_name = #{templateName},
+            </if>
+            <if test="totalAmount != null">
+                total_amount = #{totalAmount},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
+            </if>
+            <if test="workStageId != null and workStageId != ''">
+                work_stage_id = #{workStageId},
+            </if>
+            <if test="documentId != null">
+                document_id = #{documentId},
+            </if>
+            <if test="workStageName != null and workStageName != ''">
+                work_stage_name = #{workStageName},
+            </if>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName},
+            </if>
+            <if test="sectionName != null and sectionName != ''">
+                section_name = #{sectionName},
+            </if>
+            <if test="projectNodeName != null and projectNodeName != ''">
+                project_node_name = #{projectNodeName},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="subItemAmount != null">
+                sub_item_amount = #{subItemAmount},
+            </if>
+            <if test="workStageAmount != null">
+                work_stage_amount = #{workStageAmount},
+            </if>
+            <if test="workStagePercent != null">
+                work_stage_percent = #{workStagePercent},
+            </if>
+            <if test="attachmentSize != null">
+                attachment_size = #{attachmentSize},
+            </if>
+            <if test="ifContinue != null">
+                if_continue = #{ifContinue},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="totalPercent != null">
+                total_percent = #{totalPercent},
+            </if>
+            <if test="approveRemark != null and approveRemark != ''">
+                approve_remark = #{approveRemark},
+            </if>
+            <if test="audioPerson != null and audioPerson != ''">
+                audio_person = #{audioPerson},
+            </if>
+            <if test="wbsWorkstagePositionId != null and wbsWorkstagePositionId != ''">
+                wbs_workstage_position_id = #{wbsWorkstagePositionId},
+            </if>
+            <if test="attachUpdateBy != null and attachUpdateBy != ''">
+                attach_update_by = #{attachUpdateBy},
+            </if>
+            <if test="attachUpdateAt != null">
+                attach_update_at = #{attachUpdateAt},
+            </if>
+            <if test="qualityProveRemark != null and qualityProveRemark != ''">
+                quality_prove_remark = #{qualityProveRemark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from form_instances where id = #{id}
+    </delete>
+
+</mapper>
+
